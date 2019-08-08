@@ -49,5 +49,14 @@ Proxy local port 9000 to POD port 9000
 `kubectl port-forward container-service-chart-5f8bcc6c44-dmcvb 9000:9000`
 
 
+## Deploy an updated image
+
+Problem : push an updated image, tagged latest, helm upgrade does not modify the pod
+
+Potential solutions
+- helm upgrade --recreate-pods : works, but service interruption + not quite elegant
+- switching to the docker of minikube (eval $(minikube docker-env)) has no effect
+
+Or, use a different tag
 
 
