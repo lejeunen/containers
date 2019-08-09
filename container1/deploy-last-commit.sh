@@ -14,5 +14,5 @@ docker push ${IMAGE}
 docker push ${LATEST}
 
 echo
-helm upgrade container ../service-chart/ --set image.tag=${TAG},image.repository=${NAME}
+helm upgrade container1 ../system/container1/ --set image.tag=${TAG},image.repository=${NAME}
 echo

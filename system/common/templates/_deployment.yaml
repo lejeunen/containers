@@ -1,19 +1,26 @@
+{{- define "common.deployment" -}}
+{{- $common := dict "Values" .Values.common -}}
+{{- $noCommon := omit .Values "common" -}}
+{{- $overrides := dict "Values" $noCommon -}}
+{{- $noValues := omit . "Values" -}}
+{{- with merge $noValues $overrides $common -}}
 apiVersion: apps/v1
 kind: Deployment
+{{ template "common.metadata" . }}
 metadata:
-  name: {{ include "service-chart.fullname" . }}
+  name: {{ include "common.fullname" . }}
   labels:
-{{ include "service-chart.labels" . | indent 4 }}
+{{ include "common.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "service-chart.name" . }}
+      app.kubernetes.io/name: {{ include "common.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "service-chart.name" . }}
+        app.kubernetes.io/name: {{ include "common.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
     {{- with .Values.imagePullSecrets }}
@@ -26,16 +33,18 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.container.port }}
+              containerPort: 9000
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: 15
             httpGet:
-              path: /
-              port: http
+              path: /health
+              port: 9000
           readinessProbe:
+            initialDelaySeconds: 15
             httpGet:
-              path: /
-              port: http
+              path: /health
+              port: 9000
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
@@ -50,3 +59,5 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+{{- end -}}
+{{- end -}}

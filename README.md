@@ -8,18 +8,18 @@
 
 ## Cache friendly docker image creation
 
-`docker build -t lejeunen/container:cache-friendly -f Dockerfile.cache-friendly .`
+`docker build -t lejeunen/container1:cache-friendly -f Dockerfile.cache-friendly .`
 
-`docker run -p 9000:9000 lejeunen/container:cache-friendly`
+`docker run -p 9000:9000 lejeunen/container1:cache-friendly`
 
 
 ## Templating with Helm
 
 ### Deploy the image as latest
 
-`docker build -t lejeunen/container:latest -f Dockerfile.cache-friendly .`
+`docker build -t lejeunen/container1:latest -f Dockerfile.cache-friendly .`
 
-`docker push lejeunen/container:latest`
+`docker push lejeunen/container1:latest`
 
 ### Setup helm
 
@@ -39,24 +39,29 @@ Then, finally
 
 ### Install the chart
 
-`helm install --name container ./service-chart/`
+In system/container1/
+
+`helm dependency update`
+
+Then, in root directory
+
+`helm install  --name container1 ./system/container1/ --set image.tag=latest,image.repository=lejeunen/container1`
 
 
 Check pod status and logs
 
 Proxy local port 9000 to POD port 9000
 
-`kubectl port-forward container-service-chart-5f8bcc6c44-dmcvb 9000:9000`
+`kubectl port-forward container1-5f8bcc6c44-dmcvb 9000:9000`
 
 
 ## Deploy an updated image
 
-Problem : push an updated image, tagged latest, helm upgrade does not modify the pod
+We use the hash of the last git commit to tag the image, so that the new image is picked up by kubernetes.
+This follows the best practice to avoid "floating tags" such as latest.
 
-Potential solutions
-- helm upgrade --recreate-pods : works, but service interruption + not quite elegant
-- switching to the docker of minikube (eval $(minikube docker-env)) has no effect
+See container1/deploy-last-commit.sh
 
-Or, use a different tag
+
 
 

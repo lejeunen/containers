@@ -6,5 +6,5 @@ COPY src ./src
 RUN mvn -e -B package
 
 FROM openjdk:8-jre-slim
-COPY --from=builder /app/target/container-0.0.1-SNAPSHOT.jar /
-CMD ["java", "-jar", "/container-0.0.1-SNAPSHOT.jar"]
+COPY --from=builder /app/target/container1-0.0.1-SNAPSHOT.jar /
+CMD ["java", "-jar", "/container1-0.0.1-SNAPSHOT.jar"]
