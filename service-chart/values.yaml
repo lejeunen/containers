@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: lejeunen/container
-  tag: latest
+  repository:
+  tag:
   pullPolicy: Always
 
 container:

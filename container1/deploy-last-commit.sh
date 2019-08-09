@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME=lejeunen/container
+NAME=lejeunen/container1
 TAG=$(git log -1 --format=%h)
 IMAGE=${NAME}:${TAG}
 LATEST=${NAME}:latest
@@ -10,8 +10,9 @@ echo ${LATEST}
 
 docker build -t ${IMAGE} .
 docker tag ${IMAGE} ${LATEST}
-docker push ${NAME}
+docker push ${IMAGE}
+docker push ${LATEST}
 
 echo
-helm upgrade container ./service-chart/ --set image.tag=${TAG},image.repository=${NAME}
+helm upgrade container ../service-chart/ --set image.tag=${TAG},image.repository=${NAME}
 echo
