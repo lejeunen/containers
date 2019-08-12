@@ -23,9 +23,9 @@
 
 ### Setup helm
 
-`$ curl -LO https://git.io/get_helm.sh
-$ chmod 700 get_helm.sh
-$ ./get_helm.sh`
+`$ curl -LO https://git.io/get_helm.sh`
+`$ chmod 700 get_helm.sh`
+`$ ./get_helm.sh`
 
 Use RBAC to grant access to Tiller
 
@@ -61,6 +61,12 @@ We use the hash of the last git commit to tag the image, so that the new image i
 This follows the best practice to avoid "floating tags" such as latest.
 
 See container1/deploy-last-commit.sh
+
+## Multi containers
+
+Configure helm for containers 2 and 3
+
+`helm install --name container3 ./system/container3/ --set image.tag=latest,image.repository=lejeunen/container3`
 
 
 

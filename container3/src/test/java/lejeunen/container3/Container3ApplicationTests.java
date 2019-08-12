@@ -1,4 +1,4 @@
-package lejeunen.container;
+package lejeunen.container3;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ContainerApplicationTests {
+public class Container3ApplicationTests {
 
 	@Test
 	public void contextLoads() {
