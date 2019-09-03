@@ -7,4 +7,5 @@ RUN mvn -e -B package
 
 FROM openjdk:8-jre-slim
 COPY --from=builder /app/target/container1-0.0.1-SNAPSHOT.jar /
-CMD ["java", "-jar", "/container1-0.0.1-SNAPSHOT.jar"]
+
+ENTRYPOINT ["sh", "-c", "java $JVM_OPTS -jar /container1-0.0.1-SNAPSHOT.jar"]

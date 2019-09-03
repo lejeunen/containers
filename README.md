@@ -2,7 +2,7 @@
 
 ## setup
 
-`minikube start --memory 4096`
+`minikube start --memory 4096 --cpus 4`
 
 
 
@@ -68,6 +68,15 @@ Configure helm for containers 2 and 3
 
 `helm install --name container3 ./system/container3/ --set image.tag=latest,image.repository=lejeunen/container3`
 
+## Resource tuning
 
 
 
+
+# Misc
+
+Install ps on slim container
+`apt-get update && apt-get install procps`
+
+View max heap using actuator
+`http://localhost:9000/metrics/jvm.memory.max?tag=area:heap`
