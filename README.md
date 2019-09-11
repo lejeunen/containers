@@ -70,6 +70,9 @@ Configure helm for containers 2 and 3
 
 ## Resource tuning
 
+See system/container1/values.yaml and container1/Dockerfile
+
+
 
 
 
