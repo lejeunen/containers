@@ -9,6 +9,7 @@ resource "aws_internet_gateway" "this" {
 
 
 resource "aws_eip" "this" {
+  count = var.subnet_count
   vpc = true
   tags = {
     Name = "${var.env}_nat_gateway"
@@ -17,8 +18,9 @@ resource "aws_eip" "this" {
 }
 
 resource "aws_nat_gateway" "this" {
-  allocation_id = aws_eip.this.id
-  subnet_id = aws_subnet.gateway.id
+  count = var.subnet_count
+  allocation_id = aws_eip.this.*.id[count.index]
+  subnet_id = aws_subnet.gateway.*.id[count.index]
   tags = {
     Name = "${var.env}_nat_gateway"
     Env = var.env

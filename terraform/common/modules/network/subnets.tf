@@ -3,8 +3,9 @@ data "aws_availability_zones" "available" {
 }
 
 resource "aws_subnet" "gateway" {
-  availability_zone = data.aws_availability_zones.available.names[0]
-  cidr_block = "10.0.10.0/24"
+  count = var.subnet_count
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+  cidr_block = "10.0.1${count.index}.0/24"
   vpc_id = aws_vpc.eks.id
   tags = {
     Name = "${var.env}_gateway"
@@ -12,12 +13,17 @@ resource "aws_subnet" "gateway" {
   }
 }
 
-resource "aws_subnet" "application_dev" {
-  availability_zone = data.aws_availability_zones.available.names[0]
-  cidr_block = "10.0.20.0/24"
+resource "aws_subnet" "application" {
+  count = var.subnet_count
+  availability_zone = data.aws_availability_zones.available.names[count.index]
+  cidr_block = "10.0.2${count.index}.0/24"
   vpc_id = aws_vpc.eks.id
-  tags = {
-    Name = "${var.env}_application"
-    Env = var.env
-  }
+
+  tags = map(
+     "Name", "${var.env}_application",
+     "Env", var.env,
+     "kubernetes.io/cluster/${var.env}_eks", "shared",
+    )
+
+
 }

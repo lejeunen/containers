@@ -1,3 +1,5 @@
 locals {
-  env = "dev"
+  env          = "dev"
+  subnet_count = 2
 }
+
