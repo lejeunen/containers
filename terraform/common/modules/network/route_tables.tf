@@ -6,7 +6,7 @@ resource "aws_route_table" "application" {
     nat_gateway_id = aws_nat_gateway.this.*.id[count.index]
   }
   tags = {
-    Name = "${var.env}_application"
+    Name = "${var.cluster_name}_application"
     Env = var.env
   }
 }
@@ -19,7 +19,7 @@ resource "aws_route_table" "gateway" {
     gateway_id = aws_internet_gateway.this.id
   }
   tags = {
-    Name = "${var.env}_gateway"
+    Name = "${var.cluster_name}_gateway"
     Env = var.env
   }
 }

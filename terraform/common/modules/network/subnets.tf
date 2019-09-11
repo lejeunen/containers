@@ -8,7 +8,7 @@ resource "aws_subnet" "gateway" {
   cidr_block = "10.0.1${count.index}.0/24"
   vpc_id = aws_vpc.eks.id
   tags = {
-    Name = "${var.env}_gateway"
+    Name = "${var.cluster_name}_gateway"
     Env = var.env
   }
 }
@@ -20,9 +20,9 @@ resource "aws_subnet" "application" {
   vpc_id = aws_vpc.eks.id
 
   tags = map(
-     "Name", "${var.env}_application",
+     "Name", "${var.cluster_name}_application",
      "Env", var.env,
-     "kubernetes.io/cluster/${var.env}_eks", "shared",
+     "kubernetes.io/cluster/${var.cluster_name}", "shared",
     )
 
 

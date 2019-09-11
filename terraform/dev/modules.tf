@@ -3,6 +3,7 @@ module "network" {
 
   // inputs from modules
   env          = local.env
+  cluster_name = local.cluster_name
   subnet_count = local.subnet_count
 }
 
@@ -12,5 +13,6 @@ module "eks" {
   // inputs from modules
   vpc_id         = module.network.vpc_id
   env            = local.env
+  cluster_name = local.cluster_name
   app_subnet_ids = module.network.app_subnet_ids
 }

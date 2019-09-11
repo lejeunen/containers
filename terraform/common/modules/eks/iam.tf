@@ -1,6 +1,6 @@
 # Setup for IAM role needed to setup an EKS cluster
 resource "aws_iam_role" "eks_master" {
-  name = "${var.env}_eks_master"
+  name = "${var.cluster_name}_master"
 
   assume_role_policy = <<POLICY
 {
@@ -18,7 +18,7 @@ resource "aws_iam_role" "eks_master" {
 POLICY
 
   tags = {
-    Name = "${var.env}_eks_master"
+    Name = "${var.cluster_name}_master"
     Env = var.env
   }
 }
@@ -37,7 +37,7 @@ resource "aws_iam_role_policy_attachment" "cluster_AmazonEKSServicePolicy" {
 # Setup IAM role & instance profile for worker nodes
 
 resource "aws_iam_role" "eks_node" {
-  name = "${var.env}_node_master"
+  name = "${var.cluster_name}_node"
 
   assume_role_policy = <<POLICY
 {
@@ -55,7 +55,7 @@ resource "aws_iam_role" "eks_node" {
 POLICY
 
   tags = {
-    Name = "${var.env}_node_master"
+    Name = "${var.cluster_name}_node"
     Env = var.env
   }
 }

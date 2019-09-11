@@ -1,22 +1,6 @@
 ########################################################################################
 # Setup AutoScaling Group for worker nodes
 
-# Setup data source to get amazon-provided AMI for EKS nodes
-data "aws_ami" "eks_worker" {
-  filter {
-    name = "name"
-    values = [
-      "amazon-eks-node-v*"]
-  }
-
-  most_recent = true
-  owners = [
-    "602401143452"]
-  # Amazon EKS AMI Account ID
-}
-
-# Is provided in demo code, no idea what it's used for though! TODO: DELETE
-# data "aws_region" "current" {}
 
 # EKS currently documents this required userdata for EKS worker nodes to
 # properly configure Kubernetes applications on the EC2 instance.
@@ -27,7 +11,7 @@ locals {
   tf-eks-node-userdata = <<USERDATA
 #!/bin/bash -xe
 
-sudo /etc/eks/bootstrap.sh --apiserver-endpoint '${aws_eks_cluster.this.endpoint}' --b64-cluster-ca '${aws_eks_cluster.this.certificate_authority.0.data}' '${var.env}_eks'
+sudo /etc/eks/bootstrap.sh --apiserver-endpoint '${aws_eks_cluster.this.endpoint}' --b64-cluster-ca '${aws_eks_cluster.this.certificate_authority.0.data}' '${var.cluster_name}'
 USERDATA
 }
 
@@ -52,17 +36,17 @@ resource "aws_autoscaling_group" "this" {
   launch_configuration = aws_launch_configuration.this.id
   max_size = "2"
   min_size = "2"
-  name = "${var.env}_eks"
+  name = var.cluster_name
   vpc_zone_identifier = var.app_subnet_ids
 
   tag {
     key = "Name"
-    value = "${var.env}_eks"
+    value = var.cluster_name
     propagate_at_launch = true
   }
 
   tag {
-    key                 = "kubernetes.io/cluster/${var.env}_eks"
+    key                 = "kubernetes.io/cluster/${var.cluster_name}"
     value               = "owned"
     propagate_at_launch = true
   }

@@ -26,6 +26,6 @@ users:
       args:
         - "token"
         - "-i"
-        - "dev_eks"
+        - "${var.cluster_name}"
 KUBECONFIG
 }

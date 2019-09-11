@@ -73,7 +73,19 @@ Configure helm for containers 2 and 3
 See system/container1/values.yaml and container1/Dockerfile
 
 
+# Terraform
 
+Set variables in terraform/dev/variables.tf
+
+`terraform init`
+
+`terraform apply`
+
+`terraform output kubeconfig > config`
+
+`mv config ~/.kube/config`
+
+Check cluster state with _kubectl cluster-info_ and _kubectl get nodes_
 
 
 # Misc
