@@ -15,4 +15,6 @@ module "eks" {
   env            = local.env
   cluster_name = local.cluster_name
   app_subnet_ids = module.network.app_subnet_ids
+  keypair_name = local.keypair_name
+  worker_ami = local.worker_ami
 }

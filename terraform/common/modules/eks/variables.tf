@@ -10,3 +10,9 @@ variable "cluster_name" {
 variable "app_subnet_ids" {
   type = list(string)
 }
+variable "worker_ami"{
+  type = "string"
+}
+variable "keypair_name"{
+  type = "string"
+}

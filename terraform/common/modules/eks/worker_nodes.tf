@@ -18,13 +18,13 @@ USERDATA
 resource "aws_launch_configuration" "this" {
   associate_public_ip_address = true
   iam_instance_profile = aws_iam_instance_profile.node.name
-  image_id = "ami-01ffee931e45bb6bf"
+  image_id = var.worker_ami
   instance_type = "m4.large"
-  name_prefix = "${var.env}_eks"
+  name_prefix = var.cluster_name
   security_groups = [
     aws_security_group.eks_node.id]
   user_data_base64 = base64encode(local.tf-eks-node-userdata)
-  # TODO  key_name                    = "${var.keypair-name}"
+  key_name = var.keypair_name
 
   lifecycle {
     create_before_destroy = true
@@ -46,8 +46,8 @@ resource "aws_autoscaling_group" "this" {
   }
 
   tag {
-    key                 = "kubernetes.io/cluster/${var.cluster_name}"
-    value               = "owned"
+    key = "kubernetes.io/cluster/${var.cluster_name}"
+    value = "owned"
     propagate_at_launch = true
   }
 

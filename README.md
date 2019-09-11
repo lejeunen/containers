@@ -75,6 +75,8 @@ See system/container1/values.yaml and container1/Dockerfile
 
 # Terraform
 
+## cluster creation
+
 Set variables in terraform/dev/variables.tf
 
 `terraform init`
@@ -86,6 +88,9 @@ Set variables in terraform/dev/variables.tf
 `mv config ~/.kube/config`
 
 Check cluster state with _kubectl cluster-info_ and _kubectl get nodes_
+
+
+## Helm installation
 
 
 # Misc
