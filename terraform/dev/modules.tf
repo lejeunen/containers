@@ -18,3 +18,13 @@ module "eks" {
   keypair_name = local.keypair_name
   worker_ami = local.worker_ami
 }
+
+module "post" {
+  source = "../common/modules/application"
+
+  // inputs from modules
+  env          = local.env
+  cluster_name = local.cluster_name
+  module_charts = "../../system/"
+  app_namespace = local.app_namespace
+}

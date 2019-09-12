@@ -10,7 +10,7 @@ provider "kubernetes" {
   cluster_ca_certificate    = base64decode(aws_eks_cluster.this.certificate_authority.0.data)
   token                     = data.external.aws_iam_authenticator.result.token
   load_config_file          = false
-  version = "~> 1.9"
+  version = "~> 1.9.0"
 }
 
 # Allow worker nodes to join cluster via config map

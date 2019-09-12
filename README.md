@@ -92,6 +92,18 @@ Check cluster state with _kubectl cluster-info_ and _kubectl get nodes_
 
 ## Helm installation
 
+kubectl create -f rbac-config.yml   to create the service account and binding
+
+QoL : kubectl config set-context --current --namespace=emasphere
+
+
+
+## Entry point
+
+LB inside the cluster or from the platform.
+Good insight : https://mayara.io/blog/eks_terraform_and_helm/
+
+
 
 # Misc
 
