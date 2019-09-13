@@ -33,4 +33,5 @@ resource "kubernetes_cluster_role_binding" "tiller" {
     namespace = "infra"
   }
 
+  depends_on = [kubernetes_namespace.infra]
 }

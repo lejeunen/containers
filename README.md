@@ -83,18 +83,35 @@ Set variables in terraform/dev/variables.tf
 
 `terraform init`
 
-`terraform apply`
+`terraform apply -target=module.network`
 
-`terraform output kubeconfig > config`
+`terraform apply -target=module.eks`
 
-`mv config ~/.kube/config`
 
-Check cluster state with _kubectl cluster-info_ and _kubectl get nodes_
+Check cluster state with _kubectl cluster-info_ and _kubectl get nodes -A_
 
 
 ## Helm installation
 
 Tiller is deployed in namespace _infra_, with an adhoc service account
+
+`terraform apply -target=module.infra `
+
+
+## Dashboard
+
+Is installed by Helm through the stable/kubernetes-dashboard chart
+
+`kubectl proxy`
+
+`aws eks get-token --cluster-name dev_eks | jq -r '.status.token'`
+
+http://localhost:8001/api/v1/namespaces/kube-system/services/https:dashboard-kubernetes-dashboard:/proxy
+
+
+## Deploy containers
+
+`terraform apply -target=module.app `
 
 QoL : kubectl config set-context --current --namespace=emasphere
 
