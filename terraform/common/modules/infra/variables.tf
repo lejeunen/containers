@@ -4,9 +4,7 @@ variable "env" {
 variable "cluster_name" {
   type = "string"
 }
-variable "module_charts" {
-  type = "string"
-}
-variable "app_namespace" {
+# creates an explicit dependency towards module eks
+variable "eks_cluster_id" {
   type = "string"
 }

@@ -29,3 +29,10 @@ users:
         - "${var.cluster_name}"
 KUBECONFIG
 }
+
+resource "local_file" "config" {
+  content     = local.kubeconfig
+  filename = "/Users/nlejeune/.kube/config"
+
+  #depends_on = [aws_eks_cluster.this] # do not generate config file before the cluster is created. TODO really needed?
+}

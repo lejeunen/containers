@@ -1,4 +1,4 @@
-output "kubeconfig" {
-  value = module.eks.eks_kubeconfig
-  sensitive = true
-}
+#output "kubeconfig" {
+#  value = module.eks.eks_kubeconfig
+#  sensitive = true
+#}

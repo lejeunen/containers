@@ -1,6 +1,3 @@
-output "eks_kubeconfig" {
-  value = local.kubeconfig
-  depends_on = [
-    "aws_eks_cluster.this"
-  ]
+output "eks_cluster_id" {
+  value = aws_eks_cluster.this.id
 }

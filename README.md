@@ -75,7 +75,9 @@ See system/container1/values.yaml and container1/Dockerfile
 
 # Terraform
 
-## cluster creation
+## EKS cluster creation
+
+Required : AWS configuration with profile _dev_ 
 
 Set variables in terraform/dev/variables.tf
 
@@ -92,7 +94,7 @@ Check cluster state with _kubectl cluster-info_ and _kubectl get nodes_
 
 ## Helm installation
 
-kubectl create -f rbac-config.yml   to create the service account and binding
+Tiller is deployed in namespace _infra_, with an adhoc service account
 
 QoL : kubectl config set-context --current --namespace=emasphere
 
@@ -112,3 +114,6 @@ Install ps on slim container
 
 View max heap using actuator
 `http://localhost:9000/metrics/jvm.memory.max?tag=area:heap`
+
+_Ghost_ Terraform resources
+`terraform state rm module.application.helm_release.container1`
