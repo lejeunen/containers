@@ -39,13 +39,13 @@ Then, finally
 
 ### Install the chart
 
-In system/container1/
+In helm/container1/
 
 `helm dependency update`
 
 Then, in root directory
 
-`helm install  --name container1 ./system/container1/ --set image.tag=latest,image.repository=lejeunen/container1`
+`helm install  --name container1 ./helm/container1/ --set image.tag=latest,image.repository=lejeunen/container1`
 
 
 Check pod status and logs
@@ -66,11 +66,11 @@ See container1/deploy-last-commit.sh
 
 Configure helm for containers 2 and 3
 
-`helm install --name container3 ./system/container3/ --set image.tag=latest,image.repository=lejeunen/container3`
+`helm install --name container3 ./helm/container3/ --set image.tag=latest,image.repository=lejeunen/container3`
 
 ## Resource tuning
 
-See system/container1/values.yaml and container1/Dockerfile
+See helm/container1/values.yaml and container1/Dockerfile
 
 
 # Terraform

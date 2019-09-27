@@ -28,7 +28,8 @@ module "infra" {
 module "app" {
   source = "../common/modules/app"
 
-  module_charts = "../../system/"
+  module_charts = "../../helm/"
   app_namespace = local.app_namespace
   infra_namespace = module.infra.infra_namespace # dependency towards module infra
+  gateway_subnet_ids = module.network.gateway_subnet_ids
 }

@@ -10,3 +10,7 @@ variable "app_namespace" {
 variable "infra_namespace" {
   type = "string"
 }
+
+variable "gateway_subnet_ids"{
+  type = list(string)
+}
