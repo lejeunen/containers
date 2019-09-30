@@ -134,3 +134,6 @@ View max heap using actuator
 
 _Ghost_ Terraform resources
 `terraform state rm module.application.helm_release.container1`
+
+Reinstall stable helm repo
+`helm repo add stable https://kubernetes-charts.storage.googleapis.com/`
