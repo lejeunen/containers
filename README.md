@@ -137,3 +137,12 @@ _Ghost_ Terraform resources
 
 Reinstall stable helm repo
 `helm repo add stable https://kubernetes-charts.storage.googleapis.com/`
+
+Error locking state: Error acquiring the state lock
+`terragrunt force-unlock 0d73dd3d-6207-7e93-2a2d-3c8e4dece4ab`
+
+Force refresh of terragrunt cache
+`terragrunt apply --terragrunt-source-update`
+
+Weird _"Duplicate backend configuration"_ when working with nested modules and --terragrunt-source
+`I committed and pushed my module definition and removed the --terragrunt-source`
