@@ -14,5 +14,5 @@ docker push ${IMAGE}
 docker push ${LATEST}
 
 echo
-helm upgrade module2 ../helm/container2/ --set image.tag=${TAG},image.repository=${NAME} --tiller-namespace infra
+helm upgrade module2 'containers/container2' --set image.tag=${TAG},image.repository=${NAME} --tiller-namespace infra
 echo
