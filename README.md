@@ -34,3 +34,7 @@ Force refresh of terragrunt cache (slow)
 
 Weird _"Duplicate backend configuration"_ when working with nested modules and --terragrunt-source
 `I committed and pushed my module definition and removed the --terragrunt-source`
+
+Force usage of updated charts (should not happen if chart immutability is respected)
+`helm repo update`
+
