@@ -44,3 +44,10 @@ This follows the best practice to avoid "floating tags" such as latest.
 
 See container1/deploy-last-commit.sh
 
+## traefik
+
+helm install stable/traefik --name traefik --set dashboard.enabled=true,serviceType=NodePort,dashboard.domain=dashboard.traefik,rbac.enabled=true,service.nodePorts.http=30284  --namespace kube-system  --tiller-namespace infra
+
+kubectl port-forward --namespace kube-system  traefik-8b7bdd879-fwvdk  8080:8080
+
+play with ReplacePathRegex

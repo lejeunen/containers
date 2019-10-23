@@ -38,3 +38,14 @@ Weird _"Duplicate backend configuration"_ when working with nested modules and -
 Force usage of updated charts (should not happen if chart immutability is respected)
 `helm repo update`
 
+Bash into pod of namespace
+`kubectl exec  module1-container1-d69b4b7cb-zcvtw  -n emasphere -it -- bash`
+
+Debug DNS from pod
+
+```
+apt-get update
+apt-get install busybox
+busybox nslookup module2-container2.emasphere.svc.cluster.local
+```
+
