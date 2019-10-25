@@ -27,7 +27,7 @@ public class Container1Application {
 	public String callModule2(){
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response
-				= restTemplate.getForEntity("http://module2-container2.emasphere.svc.cluster.local:9000/hello" , String.class);
+				= restTemplate.getForEntity("http://container2.emasphere.svc.cluster.local:9000/hello" , String.class);
 
 		return response.toString();
 	}
