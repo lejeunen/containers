@@ -27,7 +27,8 @@ public class Container1Application {
 	public String callModule2(){
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<String> response
-				= restTemplate.getForEntity("http://container2.emasphere.svc.cluster.local:9000/hello" , String.class);
+				= restTemplate.getForEntity("http://container2:9000/hello" , String.class);
+		// full URL : container2.emasphere.svc.cluster.local, can be abbreviated since they are in same namespace
 
 		return response.toString();
 	}
